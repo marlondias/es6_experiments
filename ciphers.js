@@ -1,3 +1,5 @@
+//TBD: Vigenere's cipher
+
 function showHelp(){
 	console.log("Usage: node ciphers.js [OPTIONS] TEXT"+
 		"\nValid options:"+
