@@ -1,3 +1,17 @@
+function showHelp(){
+	console.log("Usage: node textFun.js [OPTIONS] TEXT"+
+		"\nValid options:"+
+		"\n--help    \tShows this information."+
+		"\n--reverse \tReverts the given string."+
+		"\n--vowels  \tCounts the vowels in the string."+
+		"\n--words   \tCounts the words in the string."+
+		"\n--palindrome \tChecks if the string is a palindrome."+
+		"\n--piglatin \tShows the PigLatin version of the string (it's an english game)."+
+		"\nIt is possible to apply multiple options to the same string."+
+		"\nUse quotation marks if the target is a phrase."
+	);
+}
+
 function reverse(txt){
 	const original = txt.split("");
 	let result = "";
@@ -92,6 +106,7 @@ function main(){
 		const options = new Set();
 
 		for(arg of relevantArgs){
+			if (arg.toLowerCase() === "--help") options.add("help");
 			if (arg.toLowerCase() === "--reverse") options.add("reverse");
 			if (arg.toLowerCase() === "--piglatin") options.add("piglatin");
 			if (arg.toLowerCase() === "--vowels") options.add("vowels");
@@ -102,9 +117,9 @@ function main(){
 		if(options.size === 0){
 			console.log(`No valid arguments found! The string is: ${targetString}`);
 		}
+		else if(options.has("help")) showHelp();
 		else{
 			console.log("Original: " + targetString);
-
 			if (options.has("reverse")) console.log("Reverse: " + reverse(targetString));
 			if (options.has("piglatin")) console.log("Pig Latin: " + piglatin(targetString));
 			if (options.has("vowels")){
@@ -117,9 +132,11 @@ function main(){
 			}
 			if (options.has("words")) console.log("Words: " + wordCounter(targetString));
 		}
-
 	}
-	else console.error("Insuficient arguments! \nUsage: node textFun.js [OPTIONS] TEXT");
+	else {
+		console.error("Insuficient arguments!");
+		showHelp();
+	}
 }
 
 main();
