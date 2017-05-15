@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Baalculator - A semi-useless calculator</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+	<div class="grid-a">
+		badges
+	</div>
+
+	<div class="grid-b">
+		<section id="calculator">
+			<div class="screen"></div>
+			<div class="keyboard">
+				<div class="row">
+					<div class="key special" title="Undo" data-operation="undo"><span>&#9166;</span></div>
+					<div class="key special" title="Clear entry" data-operation="ce"><span>CE</span></div>
+					<div class="key special" title="Clear all" data-operation="clear"><span>C</span></div>
+					<div class="key operator clear-margin" title="Divide" data-operation="divide"><span>&divide;</span></div>
+				</div>
+				<div class="row">
+					<div class="key number" data-number="7"><span>7</span></div>
+					<div class="key number" data-number="8"><span>8</span></div>
+					<div class="key number" data-number="9"><span>9</span></div>
+					<div class="key operator clear-margin" title="Multiply" data-operation="multiply"><span>&times;</span></div>
+				</div>
+				<div class="row">
+					<div class="key number" data-number="4"><span>4</span></div>
+					<div class="key number" data-number="5"><span>5</span></div>
+					<div class="key number" data-number="6"><span>6</span></div>
+					<div class="key operator clear-margin" title="Subtract" data-operation="minus"><span>&minus;</span></div>
+				</div>
+				<div class="row">
+					<div class="key number" data-number="1"><span>1</span></div>
+					<div class="key number" data-number="2"><span>2</span></div>
+					<div class="key number" data-number="3"><span>3</span></div>
+					<div class="key operator clear-margin" title="Add" data-operation="plus"><span>&plus;</span></div>
+				</div>
+				<div class="row">
+					<div class="key operator" title="Change signal" data-operation="signal"><span>&plusmn;</span></div>
+					<div class="key number" data-number="0"><span>0</span></div>
+					<div class="key operator" title="Decimal dot" data-operation="dot"><span>&middot;</span></div>
+					<div class="key special equals clear-margin" title="Evaluate" data-operation="result"><span>&#61;</span></div>
+				</div>
+			</div>
+		</section>
+	</div>
+
+	<div class="grid-c">
+		<section id="invocation-area">
+			<img id="bapho" title="I'm not Baal, fuck you!" src="assets/baphomet_purple.png">
+		</section>		
+	</div>
+
+	<footer class="main-footer row">
+		<p><strong>Baalculator</strong> by Marlon Dias, 2017.</p>
+	</footer>
+
+	<script src="main.js"></script>
+</body>
+</html>
