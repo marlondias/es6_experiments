@@ -18,17 +18,41 @@ const hotel = {
 	name: "Moderny",
 	suites: new Map(),
 	rooms: new Map(),
-	revenue: 0
+	revenue: 0,
+	find: function(value){
+		const id = isNaN(value * 1) ? 0 : value * 1;
+		if(this.suites.has(id)) return this.suites.get(id);
+		else if(this.rooms.has(id)) return this.rooms.get(id);
+		else return null;
+	}
 };
 
 
 (function(){
-	const countRoyalFloors = 2;
-	const countNormalFloors = 4;
-	const roomsPerRoyalFloor = 4;
-	const roomsPerNormalFloor = 6;
-	const royalBasePrice = 100;
-	const normalBasePrice = 50;
+	const building = document.getElementById("building");
+
+	const button_in = document.createElement('button');
+	button_in.setAttribute('type', 'button');
+	button_in.innerHTML = 'Check-in';
+	button_in.addEventListener('click', function(){
+		const target = hotel.find(this.getAttribute('data-target'));
+		if(target !== null){
+			toggleRoom(target);
+			console.log(target);
+		}
+	});
+
+	const button_out = document.createElement('button');
+	button_out.setAttribute('type', 'button');
+	button_out.innerHTML = 'Check-out';
+	button_out.addEventListener('click', function(){
+		const id = this.getAttribute('data-target');
+		const target = hotel.find(id);
+		if(target !== null){
+			toggleRoom(target);
+			console.log(target);
+		}
+	});
 
 	function setInfo(roomObj){
 		const txtID = document.getElementById("room_id");
@@ -37,27 +61,59 @@ const hotel = {
 		const txtAvailable = document.getElementById("room_available");
 		const boxOptions = document.getElementById("room_options");
 
-		const button_in = document.createElement('button');
-		button_in.setAttribute('type', 'button');
-		button_in.innerHTML = 'Check-in';
-
-		const button_out = document.createElement('button');
-		button_out.setAttribute('type', 'button');
-		button_out.innerHTML = 'Check-out';
-
 		txtID.innerHTML = roomObj.id;
 		txtSize.innerHTML = roomObj.size;
 		txtPrice.innerHTML = roomObj.price;
 		if(roomObj.available){
 			txtAvailable.innerHTML = 'This room is available';
+			while(boxOptions.firstChild){
+				boxOptions.removeChild(boxOptions.firstChild);
+			}
+			button_in.setAttribute('data-target', roomObj.id);
 			boxOptions.appendChild(button_in);
 		}
 		else{
 			txtAvailable.innerHTML = 'This room is already in use';
+			while(boxOptions.firstChild){
+				boxOptions.removeChild(boxOptions.firstChild);
+			}
+			button_out.setAttribute('data-target', roomObj.id);
+			boxOptions.appendChild(button_out);
 		}
 	}
 
-	const building = document.getElementById("building");
+	function toggleRoom(value){
+		const id = isNaN(value * 1) ? 0 : value * 1;
+		const roomObj = hotel.find(id);
+		if(roomObj === null) return;
+		else{
+			const windows = document.getElementById('building').getElementsByClassName('window');
+			if(roomObj.available){
+				roomObj.available = false;
+				for(let w of windows){
+					if(w.getAttribute('title') == id) w.className += ' unavailable';
+				}
+			}
+			else{
+				roomObj.available = true;
+				for(let w of windows){
+					if(w.getAttribute('title') == id) w.className = 'window';
+				}
+			}
+		}
+	}
+
+
+
+
+
+	const countRoyalFloors = 2;
+	const countNormalFloors = 4;
+	const roomsPerRoyalFloor = 4;
+	const roomsPerNormalFloor = 6;
+	const royalBasePrice = 100;
+	const normalBasePrice = 50;
+
 	let height = (countRoyalFloors + countNormalFloors);
 
 
