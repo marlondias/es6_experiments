@@ -1,0 +1,12 @@
+{
+  "name": "imdb_crawler",
+  "version": "0.0.1",
+  "description": "Simple crawler",
+  "main": "server.js",
+  "author": "Marlon Dias",
+  "dependencies" : {
+    "express"    : "latest",
+    "request"    : "latest",
+    "cheerio"    : "latest"
+  }
+}
