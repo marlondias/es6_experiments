@@ -36,7 +36,5 @@ fs.readdir(path, (err, list) => {
     if(ext === extension) output.push(filename);
   }
 
-  for(o of output){
-    console.log(o);
-  }
+  for(o of output){ console.log(o); }
 });

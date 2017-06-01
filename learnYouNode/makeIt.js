@@ -17,7 +17,5 @@ makeit(path, extension, (err, files) => {
     console.log('ERROR: Some nasty bug emerged!!');
     return;
   }
-  for(f of files){
-    console.log(f);
-  }
+  for(f of files){ console.log(f); }
 });
