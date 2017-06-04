@@ -15,6 +15,9 @@ const server = http.createServer((request, response) => {
       return chunk.toString().toUpperCase();
     })).pipe(response);
   }
+  else{
+    response.end('Only GET requests are accepted!');
+  }
 });
 
 server.listen(port);
