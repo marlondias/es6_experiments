@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Simulador de Trading</title>
+
+	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+
+	<link href="main.css" rel="stylesheet">
+</head>
+<body>
+	<section class="container">
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalDeposito">
+			<span class="glyphicon glyphicon-circle-arrow-up" aria-hidden="true"></span>
+			Depositar R$
+		</button>
+
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalSaque">
+			<span class="glyphicon glyphicon-circle-arrow-down" aria-hidden="true"></span>
+			Sacar R$
+		</button>
+
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalTransacao">
+			<span class="glyphicon glyphicon-retweet" aria-hidden="true"></span>
+			Transação em BTC
+		</button>
+
+		<div class="col-xs-12">
+			<form>
+				<div class="row">
+					<div class="form-group col-md-3">
+						<label>Comissão total</label>
+						<div class="input-group">
+							<span class="input-group-addon">R$</span>
+							<input type="text" id="comissao_total_deposito" class="form-control" aria-label="Valor em reais" placeholder="0,00" disabled="true">
+						</div>
+					</div>
+					<div class="form-group col-md-3">
+						<label>Perdas</label>
+						<div class="input-group">
+							<span class="input-group-addon">R$</span>
+							<input type="text" id="prejuizo_deposito" class="form-control" aria-label="Valor em reais" placeholder="0,00" disabled="true">
+						</div>
+					</div>
+					<div class="form-group col-md-3">
+						<label>Custo da operação</label>
+						<div class="input-group">
+							<span class="input-group-addon">R$</span>
+							<input type="text" id="custo_total_deposito" class="form-control" aria-label="Valor em reais" placeholder="0,00" disabled="true">
+						</div>
+					</div>
+					<div class="form-group col-md-3">
+						<label>Valor disponível</label>
+						<div class="input-group">
+							<span class="input-group-addon">R$</span>
+							<input type="text" id="valor_disponivel_deposito" class="form-control" aria-label="Valor em reais" placeholder="0,00" disabled="true">
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+
+		<div class="col-xs-12">
+			<table class="table table-hover">
+				<thead>
+					<th>Operação</th>
+					<th>Comissão</th>
+					<th>Custo total</th>
+					<th>Valor final</th>
+					<th>Capital BRL</th>
+					<th>Capital BTC</th>
+				</thead>
+				<tbody>
+					<td>tipoaqui</td>
+					<td>0,00</td>
+					<td>0,00</td>
+					<td>0,00</td>
+					<td>0,00 (+5%)</td>
+					<td>0,00 (-5%)</td>
+				</tbody>
+			</table>
+		</div>
+	</section>
+
+	<div class="modal fade" id="modalDeposito" tabindex="-1" role="dialog">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h4 class="modal-title">Novo depósito em reais</h4>
+	      </div>
+	      <div class="modal-body">
+					<form>
+						<div class="row">
+							<div class="form-group col-xs-12 col-sm-6">
+								<label for="deposito_valorInicial">Valor depositado</label>
+								<div class="input-group">
+									<span class="input-group-addon">R$</span>
+									<input type="text" id="deposito_valorInicial" class="form-control validate-brl" aria-label="Valor em reais" placeholder="0,00">
+								</div>
+							</div>
+							<div class="form-group col-xs-12 col-sm-6">
+								<label for="deposito_custoBancario">Custo bancário</label>
+								<div class="input-group">
+									<span class="input-group-addon">R$</span>
+									<input type="text" id="deposito_custoBancario" class="form-control validate-brl" aria-label="Valor em reais" placeholder="0,00">
+								</div>
+							</div>
+							<div class="form-group col-xs-12 col-sm-6">
+								<label for="deposito_comissaoReais">Comissão da exchange</label>
+								<div class="input-group">
+									<span class="input-group-addon">R$</span>
+									<input type="text" id="deposito_comissaoReais" class="form-control validate-brl" aria-label="Valor em reais" placeholder="0,00">
+								</div>
+							</div>
+							<div class="form-group col-xs-12 col-sm-6">
+								<label for="deposito_comissaoPercentual">Comissão da exchange</label>
+								<div class="input-group">
+									<input type="text" id="deposito_comissaoPercentual" class="form-control validate-percent" aria-label="Valor em reais" placeholder="0.0">
+									<span class="input-group-addon">%</span>
+								</div>
+							</div>
+						</div>
+					</form>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+	        <button type="button" class="btn btn-success" id="btnProcessarDeposito">Processar</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+	<div class="modal fade" id="modalSaque" tabindex="-1" role="dialog">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h4 class="modal-title">Novo saque em reais</h4>
+	      </div>
+	      <div class="modal-body">
+					<form>
+						<div class="row">
+							<div class="form-group col-xs-12 col-sm-6">
+								<label for="saque_valorInicial">Valor do saque</label>
+								<div class="input-group">
+									<span class="input-group-addon">R$</span>
+									<input type="text" id="saque_valorInicial" class="form-control validate-brl" aria-label="Valor em reais" placeholder="0,00">
+								</div>
+							</div>
+							<div class="form-group col-xs-12 col-sm-6">
+								<label for="saque_custoBancario">Custo bancário</label>
+								<div class="input-group">
+									<span class="input-group-addon">R$</span>
+									<input type="text" id="saque_custoBancario" class="form-control validate-brl" aria-label="Valor em reais" placeholder="0,00">
+								</div>
+							</div>
+							<div class="form-group col-xs-12 col-sm-6">
+								<label for="saque_comissaoReais">Comissão da exchange</label>
+								<div class="input-group">
+									<span class="input-group-addon">R$</span>
+									<input type="text" id="saque_comissaoReais" class="form-control validate-brl" aria-label="Valor em reais" placeholder="0,00">
+								</div>
+							</div>
+							<div class="form-group col-xs-12 col-sm-6">
+								<label for="saque_comissaoPercentual">Comissão da exchange</label>
+								<div class="input-group">
+									<input type="text" id="saque_comissaoPercentual" class="form-control validate-percent" aria-label="Valor em reais" placeholder="0.0">
+									<span class="input-group-addon">%</span>
+								</div>
+							</div>
+						</div>
+					</form>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+	        <button type="button" class="btn btn-success" id="btnProcessarSaque">Processar</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+	<div class="modal fade" id="modalTransacao" tabindex="-1" role="dialog">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h4 class="modal-title">Nova transação em bitcoins</h4>
+	      </div>
+	      <div class="modal-body">
+					<form>
+						<div class="row">
+							<div class="form-group col-xs-12 col-sm-6">
+								<label for="transacao_tipo">Tipo de transação</label>
+								<select id="transacao_tipo" class="form-control">
+									<option selected="true" disabled="true">(selecione)</option>
+									<option value="compra">Compra</option>
+									<option value="venda">Venda</option>
+								</select>
+							</div>
+							<div class="form-group col-xs-12 col-sm-6">
+								<label for="transacao_comissao">Comissão</label>
+								<div class="input-group">
+									<input type="text" id="transacao_comissao" class="form-control validate-percent" aria-label="Porcentagem" placeholder="0.0">
+									<span class="input-group-addon">%</span>
+								</div>
+							</div>
+							<div class="form-group col-xs-12 col-sm-6">
+								<label for="transacao_valorBitcoin">Valor do Bitcoin</label>
+								<div class="input-group">
+									<span class="input-group-addon">R$</span>
+									<input type="text" id="transacao_valorBitcoin" class="form-control validate-brl" aria-label="Valor em reais" placeholder="0,00">
+								</div>
+							</div>
+							<div class="form-group col-xs-12 col-sm-6">
+								<label for="transacao_valorReais">Valor desejado</label>
+								<div class="input-group">
+									<span class="input-group-addon">R$</span>
+									<input type="text" id="transacao_valorReais" class="form-control validate-brl" aria-label="Valor em reais" placeholder="0,00">
+								</div>
+							</div>
+						</div>
+					</form>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+	        <button type="button" class="btn btn-success" id="btnProcessarTransacao">Processar</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+	<script src="main.js"></script>
+</body>
+</html>
